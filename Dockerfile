@@ -1,13 +1,17 @@
 FROM node:14-alpine
 
-WORKDIR /home/node/app
+WORKDIR /app
 
-COPY ./package.json .
+COPY package.json .
 
-RUN yarn
+COPY yarn.lock .
 
 COPY . .
 
-RUN yarn tsc
+RUN yarn
+
+RUN yarn build
+
+EXPOSE 1111
 
 CMD ["yarn", "start"]
